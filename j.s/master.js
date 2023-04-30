@@ -190,7 +190,9 @@ function getSerMood(id) {
 
     }
     search.focus()
-    
+    search.value = ""
+    showData()
+}
 }
 
 function serchDta(value) {
