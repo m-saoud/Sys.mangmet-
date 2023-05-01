@@ -12,7 +12,6 @@ let submit = document.getElementById("submit")
 let mood = "creat"
 let temp;
 
-
 //get total
 function getTotal() {
     if (price.value !== "") {
@@ -50,7 +49,8 @@ submit.onclick = function()
       category: category.value,
     }
 //count and add new product
-    if (mood==="creat") {
+   if (title.value != "" && price.value != ""&& category.value!="" && newPro.count < 100) {
+        if (mood==="creat") {
       if (newPro.count > 1) {
         for (let i = 0; i < newPro.count; i++) {
             dataPro.push(newPro)
@@ -65,14 +65,12 @@ submit.onclick = function()
         dataPro[temp] = newPro
         mood = "creat"
         submit.innerHTML = "create"
-        count.style.display = "block"
-        
+            count.style.display = "block"
+            clearData()
+   
+    }
         
     }
-    
-   
-
-
     localStorage.setItem("product",JSON.stringify(dataPro))
     console.log(dataPro)
     clearData()
@@ -100,7 +98,7 @@ function showData() {
     for (let i = 0; i < dataPro.length; i++) {
         table += ` 
         <tr>
-        <td>${i}</td>
+        <td>${i+1}</td>
         <td>${dataPro[i].title}</td>
         <td>${dataPro[i].price}</td>
         <td>${dataPro[i].taxes}</td>
@@ -118,20 +116,12 @@ function showData() {
     let btnDeletall = document.getElementById("deletall")
     if (dataPro.length > 0) {
         btnDeletall.innerHTML = `
-      <button onclick = "deleall()" >Delete All(${dataPro.length})</button>
-
-        `
-        
-        
+      <button onclick = "deleall()" >Delete All(${dataPro.length})</button> 
     } else {
         btnDeletall.innerHTML =" "
     }
 }
 showData()
-
-
-
-
 
 //delete
 function deletData(i) {
@@ -168,11 +158,6 @@ function updateData(e) {
    
 } 
 
-
-
-
-
-
 //search
 let seMood = "title"
 
@@ -182,15 +167,14 @@ function getSerMood(id) {
 
         seMood = "title"
         
-        search.placeholder="Serach by title "
-    
-    } else {
+      } else {
         seMood = "serachcategory"
-        search.placeholder="Serach by category "
-
-    }
+      }
+    search.placeholder= `Serach by ${seMood}` 
     search.focus()
-    
+    search.value = ""
+    showData()
+}
 }
 
 function serchDta(value) {
@@ -239,7 +223,6 @@ function serchDta(value) {
 document.getElementById("tbody").innerHTML = table;
 
 }
-
 
 
 //clean data
