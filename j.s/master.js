@@ -59,7 +59,7 @@ submit.onclick = function()
       
   }else {
             dataPro.push(newPro)
-            
+            clearData()
         }  
     } else {
         dataPro[temp] = newPro
