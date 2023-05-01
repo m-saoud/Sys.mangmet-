@@ -58,7 +58,8 @@ submit.onclick = function()
         }
       
   }else {
-            dataPro.push(newPro)
+      dataPro.push(newPro)
+      clearData()
             
         }  
     } else {
